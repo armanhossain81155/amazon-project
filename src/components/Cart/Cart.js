@@ -1,9 +1,12 @@
 import React from 'react';
+
 import './Cart.css'
 
 const Cart = (props) => {
     const cart = props.cart;
-    const total = cart.reduce((total, prd) => total + prd.price,0);
+    const total = cart.reduce((total, prd) => total + parseFloat(prd.price) * parseFloat(prd.quantity),0);
+    console.log(total)
+    console.log(total);
     const tax = total / 10;
     let shipping = 0;
     const grandTotal = total + tax + shipping;
@@ -23,7 +26,7 @@ const Cart = (props) => {
         <div>
             <h1>Order Summary</h1>
             <h4>Items Ordered : {cart.length}</h4>
-            <p>
+            
             Price Before Tax : {formatNumber( total)}
             <br />
             Tax : {formatNumber(tax)}
@@ -31,8 +34,11 @@ const Cart = (props) => {
             Shipping Cost : {formatNumber(shipping)}
             <br />
             <h5>Total Cost : {formatNumber(grandTotal)}</h5>
-            </p>
-            <button className = "main-button">Order Now</button>
+            
+            <br />
+            {
+                    props.children
+            }
             
             
             
